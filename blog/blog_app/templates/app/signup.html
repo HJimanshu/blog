@@ -1,0 +1,56 @@
+{% extends "app/base.html" %}
+
+{% block title %}My Signup Page{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <span class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+    </span>
+{% endfor %}
+{% endif %}
+<form class="d-flex justify-content-center" action="{% url 'signup' %}" method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="username" class="form-label">Name:</label>
+                    <input type="text" class="form-control " name="username" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control " name="email" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="password1" class="form-label">Password:</label>
+                    <input type="password" class="form-control " name="password1" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="password2" class="form-label">Confirm Password:</label>
+                    <input type="password" class="form-control " name="password2" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="submit" class="btn btn-outline-success text-center" value="Submit">
+                <span>Already have an account? <a href="{% url 'login' %}">Login</a></span>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

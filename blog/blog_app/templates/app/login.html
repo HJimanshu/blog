@@ -1,0 +1,44 @@
+{% extends "app/base.html" %}
+
+
+{% block title %}My Login page{% endblock %}
+
+{% block content %}
+{% if messages %}
+{% for message in messages %}
+    <span class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+    </span>
+{% endfor %}
+{% endif %}
+<form class="d-flex justify-content-center" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <table>
+      
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="username" class="form-label">Username:</label>
+                    <input type="text" class="form-control" name="username" required>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class="form-group">
+                    <label for="password1" class="form-label">Password:</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+            </td>
+        </tr>
+       
+        <tr>
+            <td>
+                <input type="submit" class="btn btn-outline-success text-center" value="Login">
+                <span>You don't have any account? click on <a href="{% url 'signup' %}">Signup</a></span>
+            </td>
+        </tr>
+    </table>
+</form>
+
+{% endblock %}

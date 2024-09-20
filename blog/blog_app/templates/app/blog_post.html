@@ -1,0 +1,17 @@
+{% extends "app/base.html" %}
+
+
+{% block title %}My Blog page{% endblock %}
+
+{% block content %}   
+<div class="container">
+    <h3>{{post.title}}</h3>
+    <p>{{post.title}}</p>
+    <br>
+
+<p>
+    {{post.content | safe}}
+</p>
+</div>
+
+{% endblock %}
