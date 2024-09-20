@@ -19,7 +19,7 @@
                             <a href="{% url 'blogpost' id=b.blog_id %}" class="btn"
                                 style="background-color: #669fc8 ;">Read More..</a>
                             <div class="card-body mb-lg-0" style="padding: 0;">
-                                <a href="#" class="text-decoration-none text-primary">Share this post...</a>
+                                <a href="{% url 'share_post_view' id=b.blog_id %}" class="text-decoration-none text-primary">Share this post...</a>
                             </div>
                         </div>
                     </div>

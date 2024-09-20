@@ -1,0 +1,20 @@
+<!-- app/templates/app/blog_detail.html -->
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+
+<!-- app/templates/app/blog_detail.html -->
+<h1>{{ post.title }}</h1>
+<p>{{ post.content }}</p>
+
+<h2>Comments</h2>
+{% for comment in comments %}
+    <p>{{ comment.comment }} - <em>{{ comment.written_by }}</em></p>
+{% endfor %}
+
+<h2>Add a comment</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+

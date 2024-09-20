@@ -11,7 +11,9 @@ class Blogpost(models.Model):
     create_at=models.DateTimeField(auto_now_add=True,null=True)
     status=models.CharField(max_length=10,choices=STATUS_CHOICES,default='draft')
     tags=TaggableManager()
-    
+    def get_absolute_url(self):
+        return reverse('blog_post_detail', args=[str(self.blog_id)])
+
     def __str__(self):
         return self.title
   

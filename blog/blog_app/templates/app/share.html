@@ -1,0 +1,10 @@
+<!-- app/templates/app/share.html -->
+<h1>Share "{{ post.title }}"</h1>
+<form method="post" action="{% url 'share_post_view' post.blog_id %}/">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Send</button>
+</form>
+{% if sent %}
+    <p>Your message has been sent!</p>
+{% endif %}
