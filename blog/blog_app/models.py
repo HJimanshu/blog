@@ -3,15 +3,18 @@ from django.contrib.auth.models import User
 from taggit.managers import TaggableManager
 # Create your models here.
 class Blogpost(models.Model):
+    STATUS_CHOICES = (('draft', 'draft'),(  'published', 'published'),)
     blog_id=models.AutoField(primary_key=True)
     title=models.CharField(max_length=100)
     content=models.TextField()
     author=models.ForeignKey(User,on_delete=models.CASCADE)
     create_at=models.DateTimeField(auto_now_add=True,null=True)
+    status=models.CharField(max_length=10,choices=STATUS_CHOICES,default='draft')
     tags=TaggableManager()
     
     def __str__(self):
         return self.title
+  
 
 # class Tag(models.Model):
 #     name=models.CharField(max_length=100,unique=True) 

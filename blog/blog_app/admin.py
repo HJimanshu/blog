@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from .models import Blogpost,Blogpost_tag,Comment,Like 
 # Register your models here.
 class BlogpostAdmin(admin.ModelAdmin):
-    list_display=['blog_id', 'title', 'author']
+    list_display=['blog_id', 'title', 'author','status']
     ordering =('blog_id',)
     list_filter=('title',)
     search_fields=('tags',)

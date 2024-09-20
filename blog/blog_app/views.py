@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate,login
 from .models import Blogpost
+from django.core.paginator import Paginator,EmptyPage,PageNotAnInteger
 
 def signup_view(request):
     if request.method == 'POST':
@@ -50,12 +51,49 @@ def login_view(request):
     
     
 def blog_view(request):
-    post=Blogpost.objects.all()[:6]
+    post=Blogpost.objects.all()
+    paginator=Paginator(post,5)
+    page=request.GET.get('page')
+    try:
+        posts=paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+            
     # pritn(post)
     data={
-        'posts': post
+        'posts': posts
     }
     return render(request, 'app/blog.html',data)
+
+
+# def blog_view(request):
+#     # Get all blog posts, without slicing
+#     post = Blogpost.objects.all()
+    
+#     # Set up pagination, 5 posts per page
+#     paginator = Paginator(post, 5)  
+    
+#     # Get the current page number from the request
+#     page = request.GET.get('page')
+    
+#     try:
+#         # Attempt to retrieve posts for the current page
+#         posts = paginator.page(page)
+#     except PageNotAnInteger:
+#         # If the page is not an integer, show the first page
+#         posts = paginator.page(1)
+#     except EmptyPage:
+#         # If the page is out of range, show the last page
+#         posts = paginator.page(paginator.num_pages)
+    
+#     # Pass the paginated posts to the template
+#     data = {
+#         'posts': posts
+#     }
+    
+#     return render(request, 'app/blog.html', data)
 def blog_post(request,id):
     post=Blogpost.objects.get(blog_id=id)
     return render(request, 'app/blog_post.html',{'post':post})

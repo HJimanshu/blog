@@ -3,42 +3,60 @@
 
 {% block title %}My Blog page{% endblock %}
 
-{% block content %}            
-            {% for b in posts %}
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 position-relative">
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-md-8">
-                                    <div class="card-body">
-                                        <h1 class="card-title">{{ b.title }}</h1>
-                                        <hr>
-                                        <p style="color: #918c8c;">{{ b.author }}, {{ b.create_at }}</p>
-                                        <p class="card-text">{{ b.content|truncatewords:50|safe }}</p>
-                                        <a href="{% url 'blogpost' id=b.blog_id %}" class="btn" style="background-color: #669fc8;">Read More..</a>
-                                        <div class="card-body mb-lg-0" style="padding: 0;">
-                                            <a href="#" class="text-decoration-none text-primary">Share this post...</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-            
-                        <!-- Sidebar Card -->
-                        <div class="col-md-3 position-absolute" style="top: 10%; right: 20px; z-index: 1;">
-                            <div class="card bg-dark text-light" style="padding: 10px;">
-                                <div class="card-body">
-                                    <h5 class="card-title">My Blog</h5>
-                                    <p class="card-text">This is my blog</p>
-                                </div>
+{% block content %}
+{% for b in posts %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 position-relative">
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h1 class="card-title">{{ b.title }}</h1>
+                            <hr>
+                            <p style="color: #918c8c;">{{ b.author }}, {{ b.create_at }}</p>
+                            <p class="card-text">{{ b.content|truncatewords:50|safe }}</p>
+                            <a href="{% url 'blogpost' id=b.blog_id %}" class="btn"
+                                style="background-color: #669fc8 ;">Read More..</a>
+                            <div class="card-body mb-lg-0" style="padding: 0;">
+                                <a href="#" class="text-decoration-none text-primary">Share this post...</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {% endfor %}
-            
+
+            <!-- Sidebar Card -->
+            <div class="col-md-3 position-absolute" style="top: 10%; right: 20px; z-index: 1;">
+                <div class="card text-dark" style="background-color                         :#c0c4c7;"
+                    style="padding: 10px;">
+                    <div class="card-body">
+                        <h5 class="card-title">My Blog</h5>
+                        <p class="card-text">This is my blog</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<div class="pagination"></div>
+    <span class="step-links">
+        {% if posts.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ posts.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ posts.number }} of {{ posts.paginator.num_pages }}.
+        </span>
+
+        {% if posts.has_next %}
+            <a href="?page={{ posts.next_page_number }}">next</a>
+            <a href="?page={{ posts.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
 
 
-            {% endblock %}
+{% endblock %}
