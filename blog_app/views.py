@@ -19,7 +19,7 @@ def signup_view(request):
         user = User.objects.filter(username=username).first()
         if user:
             messages.error(request, "User already exists")
-            return render(request, 'app/signup.html', {'msg': message})
+            return render(request, 'app/signup.html', {'msg': messages})
 
         # Validate password in runtime
         if password1 != password2:

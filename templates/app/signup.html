@@ -5,7 +5,7 @@
 {% block content %}
 {% if messages %}
 {% for message in messages %}
-    <span class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+    <span class="alert-primary {% if message.tags %}alert-{{ message.tags }}{% endif %}">
         {{ message }}
     </span>
 {% endfor %}
